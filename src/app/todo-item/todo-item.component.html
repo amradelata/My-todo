@@ -1,0 +1,18 @@
+
+<div [ngClass]="setClasses()">
+
+    
+    <div #mydiv>
+        <!-- <input type="checkbox"  > -->
+        <span  >{{'MY ID -'+ todo.id + " : " }}</span>
+        <span class="myTodoText" (click)="onToggle(todo)">{{todo.title}}</span>
+    </div>
+
+
+    <input #myeditinput type="text" class="displaynone" value="{{todo.title}}">
+    
+    <button #editbtn class="edit btn "  (click)=onEdit(mydiv,myeditinput,savebtn,editbtn)>Edit</button>
+    <button #savebtn class="save btn displaynone" (click)=onSave(mydiv,savebtn,myeditinput,todo,editbtn)>Save</button>
+    <button class="del btn" (click)=onDelete(todo)>x</button>
+
+</div>
