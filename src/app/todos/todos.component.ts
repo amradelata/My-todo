@@ -9,13 +9,15 @@ import { Todo } from '../modelos/Todo'
 })
 export class TodosComponent implements OnInit {
   todos:Todo[];
+  error = [];
+  
 
   constructor(private todoService:TodoService) { }
 
   ngOnInit() {
-    this.todoService.getTodos().subscribe( todos => {     
-        this.todos = todos
-      });
+    this.todoService.getTodos().subscribe(data => this.todos =  data,err => this.error = err);
+  
+    
   }
     deleteTodo(todo:Todo){
      //delete from UI

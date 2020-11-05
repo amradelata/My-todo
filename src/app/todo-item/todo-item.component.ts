@@ -17,11 +17,20 @@ export class TodoItemComponent implements OnInit {
 
   //set dynamic classes
   setClasses(){
+    
    let classes = {
      'todo': true,
-     'is-complete': this.todo.completed, //if this.todo.completed true display  is-complete style from css file
+     'is-complete': this.todo.completed, //if this.todo.completed = true display  is-complete style from css file
    } 
    return classes;
+  }
+  setSaveClasses(myeditinput){
+    // let myvaldation = 
+    let classes = {
+      
+      'Saveptn': myeditinput.addEventListener('change',this.updateValue )
+    } 
+    return classes;
   }
   //onToggle
   onToggle(todo){
@@ -37,12 +46,23 @@ export class TodoItemComponent implements OnInit {
   this.deleteTodo.emit(todo)
   }
 
-  onEdit(savebtn,mydiv,myeditinput,editbtn){
+  onEdit(mydiv,savebtn,myeditinput,todo,editbtn){
     //UI changes
      mydiv.classList.toggle("displaynone");
      myeditinput.classList.toggle("displaynone");
      savebtn.classList.toggle("displaynone");
      editbtn.classList.toggle("displaynone");
+    //  console.log(myeditinput.value)
+    //  let myvaldation =myeditinput.addEventListener('change',this.updateValue )
+      //  this.updateValue
+      //  console.log('1111') 
+     
+  }
+
+
+  updateValue(e){
+  console.log(e.target)
+  // console.log(this.savebtn)
   }
 
   onSave(mydiv,savebtn,myeditinput,todo,editbtn){
@@ -51,9 +71,12 @@ export class TodoItemComponent implements OnInit {
     myeditinput.classList.toggle("displaynone");
     savebtn.classList.toggle("displaynone");
     editbtn.classList.toggle("displaynone");
+    console.log(savebtn)
 //Server changes
-    todo.title = myeditinput.value
-    this.todoService.edittodo(todo).subscribe(todo => console.log(todo))
+    
+  
+  todo.body = myeditinput.value
+  this.todoService.edittodo(todo).subscribe(todo => console.log(todo))
 
   }
 

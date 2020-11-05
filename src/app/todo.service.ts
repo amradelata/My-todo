@@ -1,10 +1,11 @@
 
 import { getLocaleExtraDayPeriods } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs'
-import { from } from 'rxjs';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
+
+import { from,throwError,Observable } from 'rxjs';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
 import { Todo } from './modelos/Todo'
+import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,13 +17,19 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  todoUrl = "https://jsonplaceholder.typicode.com/todos"
+  //to limit the array item to 5 opjects do this after the url ?_limit=5
+  todoUrl = "https://crud-database.herokuapp.com/tweets"
 
   constructor(private http:HttpClient) {}
   // Get Todos
-   getTodos() :Observable<Todo[]>{
-    return  this.http.get<Todo[]>(this.todoUrl);
-   }
+
+
+     getTodos() : Observable<Todo[]>{
+    return this.http.get<Todo[]>(this.todoUrl)
+    .pipe(
+      catchError(this.errorHandeler)// handle the error
+    );
+  }
    //Toggle Completed  in the server shek the console
    toggleCompleted(todo: Todo):Observable<any>{
      const url = `${this.todoUrl}/${todo.id}`
@@ -43,5 +50,11 @@ export class TodoService {
      const url = `${this.todoUrl}/${todo.id}`
     return this.http.put(url, todo, httpOptions)  
    }
+
+  errorHandeler(error: HttpErrorResponse){ //error function
+     return throwError(
+    'Something bad happened; please try again later.');
+
+  }
     
 }

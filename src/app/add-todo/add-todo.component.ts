@@ -8,7 +8,7 @@ import { Todo } from '../modelos/Todo';
 })
 export class AddTodoComponent implements OnInit {
   @Output() addTodo: EventEmitter<any>= new EventEmitter(); 
-  title: string
+  body: string
   
 
   constructor() { }
@@ -17,26 +17,27 @@ export class AddTodoComponent implements OnInit {
   }
   //set dynamic classes
   setClasses(){
+   let letterNumber = /^[0-9a-zA-Z]+$/;
    let classes = {
      
-     'rde': this.title === undefined || "" || this.title.length < 3, //if this.todo.completed true display  is-complete style from css file
+     'rde': this.body === undefined || this.body.length < 2 || !this.body.match(letterNumber)  //if input value is valide show style from css file
    } 
    return classes;
   }
   onSubmit(){
   // const myId = Math.random();
-
-  if(this.title === undefined || "" || this.title.length < 3){
+  let letterNumber = /^[0-9a-zA-Z]+$/;
+  if(this.body === undefined || this.body.length < 2 || !this.body.match(letterNumber) ){
     return 
   }else{
     const todo ={
     id:Math.floor((Math.random() * 400) + 200),
-    title:this.title,
+    body:this.body,
     completed: false,
     }
     this.addTodo.emit(todo);
     console.log(todo)
-    this.title = ""//rest the input
+    this.body = ""//rest the input
   }
 
 

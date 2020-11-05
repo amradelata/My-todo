@@ -23,9 +23,13 @@
     background-color: #f4f4f4;
     padding: 10px;
     border-bottom: 1px solid #ccc ;
-
+    
 }
-
+span{
+    
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
 
 .is-complete{
     text-decoration: line-through;
@@ -40,4 +44,7 @@
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */ 
+}
+.Saveptn{
+    background-color: indigo;
 }
