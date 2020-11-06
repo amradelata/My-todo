@@ -1,17 +1,22 @@
 <app-add-todo (addTodo)= 'addTodo($event)'></app-add-todo>
 <h1> {{error}}</h1>
-<h1 *ngIf="todos.length <= 0; then thentempalat; "> {{todos.length}}</h1>
+<!-- <h1 *ngIf="todos.length <= 0; then thentempalat; "> {{todos.length}}</h1> -->
 
-<app-todo-item 
-
-    *ngFor="let todo of todos"
+<div *ngIf="todos | async as todos; else indicator">
+    <app-todo-item 
     
-     [todo]='todo'
-     (deleteTodo)= 'deleteTodo($event)'
-     >
-     
-</app-todo-item>
+        *ngFor="let todo of todos"
+        
+         [todo]='todo'
+         (deleteTodo)= 'deleteTodo($event)'
+         >
+         
+    </app-todo-item>
+</div>
 
 <ng-template #thentempalat>
     <h3>No data found! there is no todos yet</h3>
+</ng-template>
+<ng-template #indicator>
+<loading-indicator *ngIf="loading"></loading-indicator>
 </ng-template>
