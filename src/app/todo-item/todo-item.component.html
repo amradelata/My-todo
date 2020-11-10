@@ -3,17 +3,15 @@
  
     
     <div #mydiv>
-        <!-- <input type="checkbox"  > -->
-        <!-- <span  >{{todo.id + " : " }}</span> -->
-        <span class="myTodoText" (click)="onToggle(todo)">{{todo.body}}</span>
+        <span  class="myTodoText" (click)="onToggle(todo)">{{todo.body}}</span>
     </div>
 
 
-    <input #myeditinput type="text" class="displaynone" value="{{todo.body}}" (keyup.enter)="onSave(mydiv,savebtn,myeditinput,todo,editbtn)">
+    <input #myeditinput type="text" class="displaynone" value="{{todo.body}}" (keyup.enter)=onSave(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn)>
 
-    <button #editbtn class="edit btn " (click)=onEdit(mydiv,savebtn,myeditinput,todo,editbtn) >Edit</button>
-    <button  #savebtn class="save btn displaynone" (click)=onSave(mydiv,savebtn,myeditinput,todo,editbtn)>Save</button>
-<!-- [ngClass]="setSaveClasses(myeditinput)" -->
-    <button class="del btn" (click)=onDelete(todo)>Delete</button>
+    <button #editbtn class="edit btn " (click)=onEdit(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn) >Edit</button>
+    <button   #savebtn class="btn save displaynone" (click)=onSave(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn)>Save</button>
+    <button #deletBtn class="del btn" (click)=onDelete(todo)>Delete</button>
+    <button #cancelBtn class="cancel btn displaynone" (click)=onCancel(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn)>Cancel</button>
 
 </div>

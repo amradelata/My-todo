@@ -1,8 +1,17 @@
 <app-add-todo (addTodo)="addTodo($event)"></app-add-todo>
 <h1>{{ error }}</h1>
 
-<div *ngIf="todos.length === 0 && !loading; else todoItems">No Data Found!</div>
-<div *ngIf="loading">Loading...</div>
+<div class="center" *ngIf="todos.length === 0 && !loading; else todoItems">No Data Found!</div>
+<div *ngIf="loading" class="center">
+  <div class="sk-chase">
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+  <div class="sk-chase-dot"></div>
+</div>
+</div>
 
 <app-todo-item
   #todoItems

@@ -5,6 +5,9 @@
     cursor: pointer;
     /* float: right; */
 }
+.myText{
+    background-color: #ff0000;
+}
 
 .del{
     background-color: #ff0000;
@@ -15,8 +18,16 @@
     background-color: rgb(236, 233, 35);
     color: #000;
 }
+.cancel{
+    background-color: #00b894;
+}
+
+
 .save{
-    background-color: rgb(11, 165, 88)
+    
+  background-color: #787878 ;
+  pointer-events: none;
+    
 }
 
 .todo{
@@ -38,13 +49,15 @@ span{
 .displaynone{
     display: none;
 }
+.displayblock{
+    display: inline-block;
+    background-color: rgb(11, 165, 88);
+    pointer-events: visible;
+}
 .myTodoText{
     cursor: pointer;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */ 
-}
-.Saveptn{
-    background-color: indigo;
 }

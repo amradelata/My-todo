@@ -17,7 +17,8 @@ export class AddTodoComponent implements OnInit {
   }
   //set dynamic classes
   setClasses(){
-   let letterNumber = /^[0-9a-zA-Z]+$/;
+
+   let letterNumber = /[0-9a-zA-Z]/g;
    let classes = {
      
      'rde': this.body === undefined || this.body.length < 2 || !this.body.match(letterNumber)  //if input value is valide show style from css file
@@ -26,7 +27,7 @@ export class AddTodoComponent implements OnInit {
   }
   onSubmit(){
   // const myId = Math.random();
-  let letterNumber = /^[0-9a-zA-Z]+$/;
+  let letterNumber = /[0-9a-zA-Z]/g;
   if(this.body === undefined || this.body.length < 2 || !this.body.match(letterNumber) ){
     return 
   }else{

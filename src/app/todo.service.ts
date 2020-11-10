@@ -48,7 +48,7 @@ export class TodoService {
     //  addTodo
     addTodo(todo:Todo):Observable<Todo>{
       return this.http.post<Todo>(this.todoUrl, todo, httpOptions)  
-      .pipe(delay(1500))// simulate network delay
+      // .pipe(delay(1500))// simulate network delay
       
     }
     //edittodo

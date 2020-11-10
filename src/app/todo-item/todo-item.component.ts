@@ -11,8 +11,10 @@ export class TodoItemComponent implements OnInit {
 @Input() todo: Todo;
 @Output() deleteTodo: EventEmitter<Todo>= new EventEmitter(); 
   constructor(private todoService:TodoService) { }
+  saveallowed = false
 
   ngOnInit(): void {
+    
   }
 
   //set dynamic classes
@@ -24,14 +26,8 @@ export class TodoItemComponent implements OnInit {
    } 
    return classes;
   }
-  setSaveClasses(myeditinput){
-    // let myvaldation = 
-    let classes = {
-      
-      'Saveptn': myeditinput.addEventListener('change',this.updateValue )
-    } 
-    return classes;
-  }
+
+
   //onToggle
   onToggle(todo){
   // toggle in UI
@@ -40,43 +36,67 @@ export class TodoItemComponent implements OnInit {
   this.todoService.toggleCompleted(todo).subscribe(todo => console.log(todo))
   }
 
+
   //onDelet
   onDelete(todo){
   // console.log('onDelet')  
   this.deleteTodo.emit(todo)
   }
 
-  onEdit(mydiv,savebtn,myeditinput,todo,editbtn){
+  onEdit(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn){
     //UI changes
      mydiv.classList.toggle("displaynone");
      myeditinput.classList.toggle("displaynone");
-     savebtn.classList.toggle("displaynone");
+     cancelBtn.classList.toggle("displaynone");
+     deletBtn.classList.toggle("displaynone");
      editbtn.classList.toggle("displaynone");
-    //  console.log(myeditinput.value)
-    //  let myvaldation =myeditinput.addEventListener('change',this.updateValue )
-      //  this.updateValue
-      //  console.log('1111') 
-     
+     savebtn.classList.toggle("displaynone");
+
+      myeditinput.addEventListener('keyup', ()=>{
+        if(myeditinput.value.length === 0 || myeditinput.value === todo.body){
+          savebtn.classList.remove("displayblock");
+        }else{
+         savebtn.classList.add("displayblock");
+        }
+
+      } )
+        myeditinput.select();
   }
 
 
-  updateValue(e){
-  console.log(e.target)
-  // console.log(this.savebtn)
-  }
 
-  onSave(mydiv,savebtn,myeditinput,todo,editbtn){
+
+onCancel(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn){
+//UI changes
+myeditinput.classList.toggle("displaynone");
+cancelBtn.classList.toggle("displaynone");
+deletBtn.classList.toggle("displaynone");
+mydiv.classList.toggle("displaynone");
+editbtn.classList.toggle("displaynone");
+savebtn.classList.add("displaynone");
+savebtn.classList.remove("displayblock");
+myeditinput.value = todo.body
+
+}
+
+  onSave(mydiv,savebtn,myeditinput,todo,editbtn,cancelBtn,deletBtn){
 //UI changes
     mydiv.classList.toggle("displaynone");
     myeditinput.classList.toggle("displaynone");
-    savebtn.classList.toggle("displaynone");
+    savebtn.classList.remove("displayblock");
+    savebtn.classList.add("displaynone");
     editbtn.classList.toggle("displaynone");
+    deletBtn.classList.toggle("displaynone");
+    cancelBtn.classList.toggle("displaynone");
+
     console.log(savebtn)
-//Server changes
-    
+
+
+          //Server changes
+      todo.body = myeditinput.value
+      this.todoService.edittodo(todo).subscribe(todo => console.log(todo))
   
-  todo.body = myeditinput.value
-  this.todoService.edittodo(todo).subscribe(todo => console.log(todo))
+
 
   }
 
